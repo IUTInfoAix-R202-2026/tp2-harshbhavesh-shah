@@ -117,7 +117,8 @@ class ProprieteSimpleTest {
     // Après set(2105) le listener se déclenche, mais après setValue(5012)
     // il ne se redéclenche PAS car get() n'a pas été appelé entre-temps
     verify(out).println("setValue() with 5012.");
-    // Le message "The observable has been invalidated." n'apparait qu'une seule fois
+    // Le message "The observable has been invalidated." n'apparait qu'une seule
+    // fois
   }
 
   @Disabled("Retire cette annotation pour activer le test")
