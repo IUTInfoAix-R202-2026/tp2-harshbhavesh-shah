@@ -8,7 +8,6 @@ import static org.mockito.MockitoAnnotations.openMocks;
 import java.io.PrintStream;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -38,7 +37,6 @@ class ProprieteSimpleTest {
 
   // --- creerPropriete() ---
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(1)
   void testLaProprieteExisteApresSetAnInt() {
@@ -47,7 +45,6 @@ class ProprieteSimpleTest {
         .isNotNull();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(2)
   void testLaValeurInitialeEst1024() {
@@ -56,7 +53,6 @@ class ProprieteSimpleTest {
         .isEqualTo(1024);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(3)
   void testCreerProprieteAfficheLeToString() {
@@ -64,7 +60,6 @@ class ProprieteSimpleTest {
     verify(out).println("anIntProperty = IntegerProperty [value: 1024]");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(4)
   void testCreerProprieteAfficheGet() {
@@ -72,7 +67,6 @@ class ProprieteSimpleTest {
     verify(out).println("anIntProperty.get() = 1024");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(5)
   void testCreerProprieteAfficheGetValue() {
@@ -82,7 +76,6 @@ class ProprieteSimpleTest {
 
   // --- ajouterEtRetirerInvalidationListener() ---
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(6)
   void testInvalidationListenerEstDeclenche() {
@@ -91,7 +84,6 @@ class ProprieteSimpleTest {
     verify(out).println("The observable has been invalidated.");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(7)
   void testInvalidationListenerPasDeclencheSiMemeValeur() {
@@ -107,7 +99,6 @@ class ProprieteSimpleTest {
     verify(out).println("The observable has been invalidated.");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(8)
   void testInvalidationListenerEstParesseux() {
@@ -120,7 +111,6 @@ class ProprieteSimpleTest {
     // Le message "The observable has been invalidated." n'apparait qu'une seule fois
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(9)
   void testInvalidationListenerRetireFonctionne() {
@@ -134,7 +124,6 @@ class ProprieteSimpleTest {
 
   // --- ajouterEtRetirerChangeListener() ---
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(10)
   void testChangeListenerEstDeclencheAvecAncienneEtNouvelleValeur() {
@@ -145,7 +134,6 @@ class ProprieteSimpleTest {
     verify(out).println("The observableValue has changed: oldValue = 1024, newValue = 2105");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(11)
   void testChangeListenerDeclencheAChaqueMiseAJour() {
@@ -159,7 +147,6 @@ class ProprieteSimpleTest {
     verify(out).println("The observableValue has changed: oldValue = 2105, newValue = 5012");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(12)
   void testChangeListenerRetireFonctionne() {
