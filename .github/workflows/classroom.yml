@@ -17,6 +17,18 @@ permissions:
   contents: read
   checks: write
 
+# Sérialise les runs de notation d'une même ref. Sans ça, plusieurs pushes/merges
+# rapprochés (ex. fusionner 6 PR en < 2 min) lancent des runs concurrents qui se
+# marchent dessus sur le cache des rapports Surefire (read-modify-write) : chaque
+# run restaure l'instantané le plus récent AU MOMENT de son démarrage, puis le
+# réécrit À LA FIN. Comme les runs se chevauchent, le « dernier qui écrit »
+# republie un instantané périmé où les rapports d'exercices traités en parallèle
+# manquent ou sont restés `skipped` -> ces exercices sont notés 0 à tort.
+# En sérialisant, chaque run restaure le cache COMPLET du run précédent.
+concurrency:
+  group: autograding-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build:
     name: Autograding
@@ -29,12 +41,13 @@ jobs:
           # dans le step de scope (sans ça, on tomberait sur ALL à chaque push).
           fetch-depth: 0
 
-      - name: Set up JDK 25 with JavaFX
+      - name: Set up JDK 25
         uses: actions/setup-java@v5
         with:
           java-version: '25'
           distribution: 'zulu'
-          java-package: 'jdk+fx'
+          # JavaFX 26 vient des deps Maven org.openjfx ; la Headless Platform
+          # (glass.platform=Headless) est 100 % logicielle, pas besoin de jdk+fx.
           cache: maven
 
       #@@@AUTOGRADING-BEGIN@@@ (généré par update-autograding.sh, ne pas éditer à la main)
@@ -126,9 +139,9 @@ jobs:
         run: |
           echo "Scope : ${{ steps.scope.outputs.reason }}"
           if [ "${{ steps.scope.outputs.filter }}" = "ALL" ]; then
-            xvfb-run --auto-servernum ./mvnw -B test -DfailIfNoTests=false
+            ./mvnw -B test -DfailIfNoTests=false
           else
-            xvfb-run --auto-servernum ./mvnw -B test -Dtest='${{ steps.scope.outputs.filter }}' -DfailIfNoTests=false
+            ./mvnw -B test -Dtest='${{ steps.scope.outputs.filter }}' -DfailIfNoTests=false
           fi
 
 

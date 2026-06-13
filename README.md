@@ -1,4 +1,3 @@
-[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=23807762)
 # <img src="https://raw.githubusercontent.com/IUTInfoAix-R510/Syllabus/main/assets/logo.png" alt="class logo" class="logo"/> R2.02 - Développement d'applications avec IHM
 
 ### IUT d'Aix-Marseille - Département Informatique Aix-en-Provence
@@ -23,6 +22,10 @@
 
 ## TP2 - Propriétés et bindings
 
+> 🎓 **Accepter le devoir TP2 sur GitHub Classroom** : 👉 **https://classroom.github.com/a/o8W7l2oc**
+>
+> Cela crée votre dépôt personnel `IUTInfoAix-R202-2026/tp2-votreLogin`. La marche à suivre (Classroom puis Codespace) est commune à tous les TP : voir le [TP1](https://github.com/IUTInfoAix-R202/tp1#mise-en-place).
+
 > Cours associé : [CM2 - Propriétés, bindings et contrôles](https://iutinfoaix-r202.github.io/cours/cm2-donnees-et-liaison.html)
 
 ---
@@ -36,7 +39,7 @@ Les exercices de ce TP sont organisés en progression. Cette progression suit la
 | Niveau Bloom | Exercices | Vous serez capable de... | Compétence BUT |
 |---|---|---|---|
 | **Comprendre** | 1-2 | Décrire le fonctionnement des propriétés JavaFX (`IntegerProperty`, `StringProperty`...), distinguer `InvalidationListener` et `ChangeListener`, expliquer les effets de `bind()` et `unbind()` | AC11.02, AC12.02 |
-| **Appliquer** | 3-5 | Intégrer des propriétés dans une interface graphique, construire des bindings calculés (aire d'un triangle, affichage dynamique), connecter un modèle à une vue sans `setText()` | AC11.04, AC12.02 |
+| **Appliquer** | 3-5 | Intégrer des propriétés dans une interface graphique, construire des bindings calculés (aire d'un triangle, affichage dynamique), relier des données à une interface sans `setText()` | AC11.04, AC12.02 |
 | **Analyser / Créer** | 6-8 | Concevoir un binding de bas niveau avec `computeValue()`, synchroniser plusieurs contrôles par `bindBidirectional()`, assembler une application complète avec conversion de grandeurs physiques | AC11.04 |
 
 **Tout au long du TP**, vous pratiquez aussi le **workflow professionnel** (GitHub Classroom, Codespace, Maven, branche -> Pull Request -> review). Ces compétences sont formellement développées et évaluées en **R2.03 (Qualité de développement)**, module couplé à R2.02 par la SAÉ 2.01 commune.
@@ -68,210 +71,11 @@ La progression du module prépare directement à cet objectif :
 
 ---
 
-### Prérequis
-
-#### Connaissances attendues
-
-- **Programmation orientée objet en Java** : classes, objets, héritage, interfaces, polymorphisme et expressions lambda - acquis dans la ressource R2.01
-- **Bases de JavaFX** : `Application`, `Stage`, `Scene`, hiérarchie de noeuds, layouts (`BorderPane`, `GridPane`, `HBox`, `VBox`), événements (`EventHandler`, `ActionEvent`) - acquis dans le **TP1** de cette ressource
-
-#### Environnement technique
-
-L'ensemble du TP se fait sur **GitHub Codespaces** - aucune installation locale n'est nécessaire. L'environnement (Java 25, JavaFX 25, Maven, Git, Copilot Chat) est pré-configuré et prêt à l'emploi dès l'ouverture du Codespace.
-
-> Pour une installation locale (facultative), voir la section [Dépannage](#dépannage) en fin de document.
-
-#### Documentation de référence
-
-- [JavaFX 25 API Documentation](https://openjfx.io/javadoc/25/)
-- [Java 25 API Documentation](https://docs.oracle.com/en/java/javase/25/docs/api/)
-
----
-
-## Mise en place
-
-La mise en place se fait en deux étapes : accepter le devoir sur GitHub Classroom (qui crée votre dépôt personnel), puis ouvrir ce dépôt dans un Codespace (votre environnement de développement dans le navigateur).
-
-### Étape 1 - Accepter le devoir sur GitHub Classroom
-
-1. Cliquez sur le lien suivant :
-
-   👉 **https://classroom.github.com/a/o8W7l2oc**
-
-2. Si c'est votre première utilisation de GitHub Classroom, autorisez l'accès à votre compte GitHub.
-3. Sélectionnez votre nom dans la liste de la promo (si elle apparaît) pour associer votre compte GitHub à votre identité dans le cours.
-4. Cliquez sur **"Accept this assignment"**.
-5. Attendez quelques secondes - GitHub crée automatiquement un dépôt à votre nom : `IUTInfoAix-R202-2026/tp2-votreLogin`.
-6. Cliquez sur le lien du dépôt créé pour y accéder.
-
-### Étape 2 - Ouvrir le projet dans GitHub Codespaces
-
-Une fois sur la page de votre dépôt :
-
-1. Cliquez sur le bouton vert **"Code"** (en haut à droite du listing de fichiers).
-2. Sélectionnez l'onglet **"Codespaces"**.
-3. Cliquez sur **"Create codespace on main"**.
-
-<img src="src/main/resources/assets/create_codespace_on_main.png" alt="Bouton Code -> Codespaces -> Create codespace on main" width="400"/>
-
-4. Attendez que l'environnement se construise (de 1 à 5 minutes la première fois).
-5. VS Code s'ouvre **dans votre navigateur** avec tout l'environnement pré-configuré :
-   - Java 25 + JavaFX 25
-   - Maven (via le wrapper `./mvnw`)
-   - Git
-   - Copilot Chat (votre assistant IA pédagogique)
-   - Toutes les extensions nécessaires
-
-![VS Code dans le navigateur après ouverture du Codespace](src/main/resources/assets/codespace_vscode.png)
-
-> [!IMPORTANT]
-> Le Codespace est **personnel et persistant**. Quand vous fermez l'onglet, votre travail est sauvegardé. Pour reprendre, retournez sur votre dépôt GitHub -> **"Code"** -> **"Codespaces"** -> cliquez sur le Codespace existant (ne créez pas un nouveau à chaque fois).
-
-### Vérification rapide
-
-Une fois le Codespace ouvert, ouvrez un terminal via le menu **Terminal -> New Terminal** :
-
-![Menu Terminal -> New Terminal](src/main/resources/assets/codespace_vscode_nouveau_terminal.png)
-
-Puis lancez :
-
-```bash
-./mvnw test
-```
-
-Vous devriez voir un résultat du type :
-```
-Tests run: 107, Failures: 0, Errors: 0, Skipped: 105
-BUILD SUCCESS
-```
-
-Si c'est le cas, tout est prêt. Les tests des exercices sont en attente (`Skipped`) - c'est normal, ils seront activés au fil de votre progression.
-
----
-
-## Rendu du travail et évaluation
-
-### Comment vous êtes évalués
-
-L'évaluation de ce TP est **entièrement automatique** : à chaque fois que vous poussez (`push`) votre code sur GitHub, un système d'autograding exécute tous vos tests et calcule un score sur **1000 points**.
-
-- **100 points** sont attribués si le projet **compile** correctement
-- **900 points** sont répartis entre les différents **tests des exercices** (chaque test vaut au moins 1 point)
-- Un test `@Disabled` (non encore activé) rapporte **0 point** - c'est normal
-- Un test activé et **qui passe** rapporte ses points
-- Un test activé et **qui échoue** rapporte 0 point
-
-Le score est **affiché brut sur 1000 par Classroom** (ex : `Points 250/1000`) et **ramené sur 20** au calcul final en divisant par 50. Votre note augmente progressivement au fil de votre avancement ; il n'y a pas de date limite brutale : chaque push met à jour votre score.
-
-### Consulter votre note actuelle
-
-Après chaque `push`, rendez-vous sur la page de votre dépôt GitHub -> onglet **"Actions"** -> dernier run du workflow **"GitHub Classroom Workflow"**. Le score apparaît dans le résumé :
-
-```
-Points 250/1000
-```
-
-Vous pouvez aussi voir le détail test par test pour savoir exactement quels exercices sont validés et lesquels restent à faire.
-
----
-
-## Commandes essentielles
-
-**Maven** est un outil de construction de projets Java utilisé dans la majorité des projets professionnels. Il gère automatiquement la compilation du code, le téléchargement des bibliothèques nécessaires (JavaFX, JUnit, TestFX...), l'exécution des tests et le packaging de l'application. Plutôt que de lancer `javac` et `java` à la main avec des dizaines d'options, une seule commande Maven suffit.
-
-Dans ce projet, Maven est embarqué via un **Maven Wrapper** (`./mvnw`) : un script qui télécharge et utilise automatiquement la bonne version de Maven. Aucune installation n'est nécessaire : la première exécution prend quelques secondes de plus (téléchargement), puis tout est instantané.
-
-| Commande | Effet |
-|---|---|
-| `./mvnw javafx:run` | Lance l'application JavaFX |
-| `./mvnw test` | Exécute les tests unitaires |
-| `./mvnw clean test` | Rebuild propre (supprime `target/` puis relance les tests) |
-| `./mvnw clean` | Supprime les artefacts (`target/`) |
-| `./mvnw spotless:apply` | Formate le code Java (Google Java Style) |
-
 > [!NOTE]
-> Le code est aussi formaté **automatiquement** avant chaque commit via un hook pre-commit invisible. Il n'est pas nécessaire de lancer `spotless:apply` à la main, sauf pour vérifier visuellement le formatage avant un commit.
+> **Mise en place, évaluation, commandes, workflow Git, assistance IA et dépannage : identiques au TP1.** Pour ne pas dupliquer ce qui a déjà été présenté, reportez-vous au README du TP1 :
+> [Mise en place (Classroom + Codespace)](https://github.com/IUTInfoAix-R202/tp1#mise-en-place) · [Comment vous êtes évalué·e](https://github.com/IUTInfoAix-R202/tp1#rendu-du-travail-et-évaluation) · [Commandes Maven essentielles](https://github.com/IUTInfoAix-R202/tp1#commandes-essentielles) · [Workflow Git par exercice](https://github.com/IUTInfoAix-R202/tp1#workflow-de-développement---un-cycle-par-exercice) · [Assistance IA (Copilot Chat)](https://github.com/IUTInfoAix-R202/tp1#assistance-ia) · [Dépannage](https://github.com/IUTInfoAix-R202/tp1#dépannage)
 
----
-
-## Workflow de développement
-
-Chaque exercice suit le même cycle. Cette démarche structurée vous aide à travailler de manière **méthodique et professionnelle** : c'est exactement le workflow que vous utiliserez en entreprise.
-
-**1. Créer une branche pour l'exercice**
-
-```bash
-git checkout -b exerciceN
-```
-
-**2. Activer le premier test** - ouvrez le fichier de test correspondant et retirez l'annotation `@Disabled` du premier test.
-
-**3. Vérifier que le test est rouge**
-
-```bash
-./mvnw test
-```
-
-Le test doit échouer - c'est normal et attendu. Le message d'erreur vous indique ce que le test attend.
-
-**4. Implémenter le minimum** pour faire passer ce test au vert. Pas plus que nécessaire.
-
-**5. Vérifier que le test passe**
-
-```bash
-./mvnw test
-```
-
-**6. Lancer l'application** pour voir le résultat visuellement :
-
-```bash
-./mvnw javafx:run
-```
-
-Ou via `Ctrl+Shift+B` dans VS Code.
-
-**7. Recommencer** - activez le test suivant (étapes 2 à 6) jusqu'à ce que tous les tests de l'exercice soient verts.
-
-**8. Finaliser l'exercice** - quand tous les tests passent :
-
-```bash
-git add .
-git commit -m "feat: exercice N terminé"
-git push -u origin exerciceN
-```
-
-**9. Créer une Pull Request** pour voir votre travail et recevoir une review automatique :
-
-```bash
-gh pr create --title "Exercice N terminé" --body "Tous les tests passent."
-```
-
-Ouvrez la PR dans le navigateur (`gh pr view --web`) pour consulter le diff, les checks CI, le score autograding et les commentaires de la review Copilot.
-
-**10. Merger et passer à la suite** :
-
-```bash
-gh pr merge --rebase --delete-branch
-```
-
-Votre score sur GitHub Actions augmente à chaque exercice terminé. Vous pouvez maintenant passer à l'exercice suivant en reprenant à l'étape 1.
-
-> [!TIP]
-> **Copilot Chat** est là pour vous accompagner à chaque étape. N'hésitez pas à lui poser des questions - il vous guidera sans donner la solution directement.
-
----
-
-## Assistance IA
-
-Vous avez le droit d'utiliser **Copilot Chat** (panneau latéral dans VS Code) quand vous bloquez sur un exercice. Il est configuré spécifiquement pour ce TP : il ne donnera pas la solution directement, mais vous guidera par étapes : d'abord une explication du concept, puis un pointeur vers la documentation, et seulement en dernier recours un minimum de code.
-
-**Copilot Chat n'est pas un raccourci, c'est un tuteur.** Il vous aide à comprendre, pas à copier-coller. L'objectif est que vous soyez capable d'écrire ce code **en autonomie** à la fin de la séance.
-
-**Pourquoi c'est important** : l'évaluation de ce module se fera **sur papier, sans aucun outil d'assistance**. Il est donc essentiel que vous construisiez vos automatismes en écrivant le code vous-même. Copilot Chat est un filet de sécurité pour débloquer, pas un substitut à la réflexion.
-
-**Conseil pratique** : sur les premiers exercices (1-3), n'hésitez pas à demander de l'aide pour vous familiariser avec les propriétés et les bindings. Sur les exercices avancés (6-8), essayez d'aller le plus loin possible par vous-même avant de solliciter l'assistant. C'est cette progression vers l'autonomie qui vous préparera le mieux aux évaluations.
-
-Le TP est découpé en **8 exercices principaux + 2 bonus** à faire dans l'ordre. Chaque exercice vit dans son propre sous-paquet (code et tests en miroir). L'exercice 1 est très guidé pas à pas pour vous familiariser avec l'environnement. À partir de l'exercice 2, une boucle de travail systématique est introduite que vous appliquerez pour tous les exercices suivants. Les exercices bonus ne comptent pas dans la note standard mais permettent de se confronter à des concepts plus avancés.
+Le TP2 comporte **8 exercices principaux + 2 bonus**, à faire dans l'ordre. Chaque exercice vit dans son propre sous-paquet (code et tests en miroir) et embarque ses propres commandes git dans sa section « Travail à faire » : vous créez une branche, activez les tests un par un, implémentez le minimum, puis poussez.
 
 ---
 
@@ -294,45 +98,20 @@ Cet exercice est entièrement en **console** (pas d'interface graphique). Son ob
 
 Une propriété JavaFX est une **boîte observable** : elle contient une valeur et prévient automatiquement tous les observateurs abonnés quand cette valeur change. C'est un mécanisme général de liaison de données, utile bien au-delà des interfaces graphiques.
 
-```mermaid
-graph LR
-    P["IntegerProperty<br/>valeur = 1024"]
-    IL["InvalidationListener<br/>(paresseux)"]
-    CL["ChangeListener<br/>(eager)"]
-    P -- "addListener()" --> IL
-    P -- "addListener()" --> CL
-    P -- "set(2105)" --> N["Notification"]
-    N -. "1 seule fois<br/>tant que non relu" .-> IL
-    N -- "à chaque changement<br/>old=1024, new=2105" --> CL
-```
+<img alt="Anatomie d'une propriété : un IntegerProperty notifie ses InvalidationListener (paresseux, une seule fois) et ChangeListener (à chaque changement, avec old/new)" src=".github/assets/ex1-propriete-listeners.svg"/>
 
 **Insight clé :** un `InvalidationListener` est *paresseux* - il se déclenche une seule fois quand la propriété devient invalide, et ne se redéclenche qu'après que la valeur ait été relue (via `get()`, ce qui la "revalide"). Un `ChangeListener` est *eager* - il se déclenche à **chaque** modification et reçoit l'ancienne et la nouvelle valeur.
 
-```mermaid
-sequenceDiagram
-    participant Code
-    participant Prop as IntegerProperty
-    participant IL as InvalidationListener
-    
-    Code->>Prop: set(2105)
-    Prop->>IL: invalidated() ✅
-    Note over IL: Notifié !
-    Code->>Prop: set(5012)
-    Note over IL: PAS notifié ❌<br/>(pas de get() entre-temps)
-    Code->>Prop: get()
-    Note over Prop: Revalidée
-    Code->>Prop: set(1024)
-    Prop->>IL: invalidated() ✅
-    Note over IL: Notifié à nouveau !
-```
+<img alt="InvalidationListener vs ChangeListener : l'InvalidationListener n'est notifié qu'une fois tant que la propriété n'est pas relue (get)" src=".github/assets/ex1-invalidation-vs-change.svg"/>
 
 ### Découverte du code
 
 1. Ouvrez `src/main/java/fr/univ_amu/iut/exercice1/ProprieteSimple.java`. Vous y trouverez :
-   - Un champ `IntegerProperty anIntProperty` déjà déclaré
-   - Trois méthodes avec des TODO : `creerPropriete()`, `ajouterEtRetirerInvalidationListener()`, `ajouterEtRetirerChangeListener()`
+   - Un champ `IntegerProperty anIntProperty` déjà déclaré, ainsi que `invalidationListener` et `changeListener` pour stocker les observateurs
+   - La méthode `creerPropriete()` **entièrement fournie** (instanciation + trois affichages)
+   - Les méthodes `ajouterEtRetirerInvalidationListener()` et `ajouterEtRetirerChangeListener()` avec le scénario `setValue/set` déjà fourni et **deux TODO ciblés chacune** : afficher le header `Add ... listener.` + créer + abonner le listener, puis afficher le header `Remove ... listener.` + retirer le listener
    - Les accesseurs JavaBeans `getAnInt()`, `setAnInt()`, `anIntProperty()` déjà implémentés
-   - Une méthode `main()` prête qui appelle vos trois méthodes dans l'ordre
+   - Une méthode `main()` prête qui appelle les trois méthodes dans l'ordre
 
 2. Ouvrez `src/test/java/fr/univ_amu/iut/exercice1/ProprieteSimpleTest.java`. Lisez les assertions - elles décrivent exactement la sortie console attendue. Les tests utilisent Mockito pour vérifier ce qui est affiché sur `System.out`.
 
@@ -387,20 +166,35 @@ Remarquez les différences :
 
 ### Travail à faire
 
+Pour vous concentrer sur le mécanisme d'observation, **les affichages et le scénario sont entièrement fournis** dans `ProprieteSimple.java`. La méthode `creerPropriete()` est complète, et dans les deux méthodes de listener, seuls les `addListener()` et `removeListener()` sont à écrire (4 ajouts au total).
+
 1. **Créez une branche** : `git checkout -b exercice1`
-2. **Activez** les 2 premiers tests (supprimez `@Disabled` sur les tests 1-2)
-3. **Vérifiez** que les tests passent déjà (les accesseurs sont fournis) : `./mvnw test`
-4. **Activez** les tests 3-5 et implémentez `creerPropriete()` :
-   - Instanciez `anIntProperty` si elle est null
-   - Affichez les trois lignes avec `System.out.println()`
-5. **Activez** les tests 6-9 et implémentez `ajouterEtRetirerInvalidationListener()` :
-   - Créez le listener avec une lambda : `observable -> System.out.println("...")`
-   - Abonnez-le avec `anIntProperty.addListener(invalidationListener)`
-   - Affichez les messages et changez la valeur comme indiqué dans le TODO
-   - Retirez le listener avec `removeListener()`
-6. **Activez** les tests 10-12 et implémentez `ajouterEtRetirerChangeListener()` :
-   - Créez le listener avec une lambda à 3 paramètres : `(observable, oldValue, newValue) -> ...`
-   - Même pattern : abonner, changer la valeur, désabonner
+2. **Activez les tests 1-5** : ils passent immédiatement, sans rien implémenter (les accesseurs et `creerPropriete()` sont fournis). Vérifiez avec `./mvnw test`.
+3. **Lancez `ProprieteSimple.main()` une première fois** (clic droit sur la méthode `main()` -> *Run Java* dans VSCode, ou bouton *Run* de votre IDE). Observez la sortie console : vous voyez les informations de la propriété (les trois lignes affichées par `creerPropriete()`) puis le scénario brut (`setValue() with 1024.`, `set() with 2105.`, ...) sans aucun message d'observation. Aucune ligne `Add ... listener.`, `Remove ... listener.`, ni de notification de changement n'apparaît : les listeners ne sont pas encore abonnés.
+4. **Activez les tests 6-9** et complétez `ajouterEtRetirerInvalidationListener()` (deux blocs à compléter) :
+   - Au premier TODO, écrivez 3 lignes :
+     1. Affichez `"Add invalidation listener."` avec `System.out.println(...)`.
+     2. Créez l'`InvalidationListener` avec une lambda `observable -> System.out.println("The observable has been invalidated.")` et stockez-le dans `this.invalidationListener`.
+     3. Abonnez-le via `anIntProperty.addListener(invalidationListener)`.
+   - Au second TODO, écrivez 2 lignes :
+     1. Affichez `"Remove invalidation listener."`.
+     2. Retirez le listener via `anIntProperty.removeListener(invalidationListener)`.
+5. **Activez les tests 10-12** et complétez `ajouterEtRetirerChangeListener()` (deux blocs à compléter) :
+   - Au premier TODO, écrivez 3 lignes :
+     1. Affichez `"Add change listener."`.
+     2. Créez le `ChangeListener<Number>` avec une lambda à 3 paramètres `(observable, oldValue, newValue) -> System.out.println("The observableValue has changed: oldValue = " + oldValue + ", newValue = " + newValue)` et stockez-le dans `this.changeListener`.
+     3. Abonnez-le via `anIntProperty.addListener(changeListener)`.
+   - Au second TODO, écrivez 2 lignes :
+     1. Affichez `"Remove change listener."`.
+     2. Retirez le listener via `anIntProperty.removeListener(changeListener)`.
+6. **Relancez `ProprieteSimple.main()`** et comparez avec le premier run. De nouvelles lignes apparaissent à chaque endroit où votre code abonne, désabonne, ou voit la propriété changer :
+   - `Add invalidation listener.` / `Remove invalidation listener.` (vos `addListener`/`removeListener` s'exécutent)
+   - `The observable has been invalidated.` (une seule fois, à cause du comportement paresseux)
+   - `Add change listener.` / `Remove change listener.`
+   - `The observableValue has changed: oldValue = 1024, newValue = 2105`
+   - `The observableValue has changed: oldValue = 2105, newValue = 5012`
+   
+   Cette différence est exactement ce que les listeners apportent : la possibilité d'**être notifié** quand une propriété change.
 7. **Vérifiez** que les 12 tests passent : `./mvnw test`
 8. **Finalisez** :
 
@@ -435,25 +229,19 @@ Toujours en **console**, cet exercice introduit le mécanisme de *binding* unidi
 
 Le binding unidirectionnel crée une dépendance à sens unique : `cible` suit `source`, mais l'inverse n'est pas vrai. Dès que `source` change de valeur, `cible` se met à jour automatiquement. Si l'on tente de modifier `cible` directement via `set()` alors qu'elle est liée, JavaFX lève une `RuntimeException` - c'est une protection : la cible est sous le contrôle exclusif de sa source.
 
-```mermaid
-graph LR
-    S["source\nSimpleIntegerProperty\nvaleur = 42"]
-    C["cible\nSimpleIntegerProperty\nisBound = true"]
-    S -- "cible.bind(source)" --> C
-    S -- "source.set(99)" --> S2["source\nvaleur = 99"]
-    S2 -- "propagation auto" --> C2["cible\nvaleur = 99"]
-```
+<img alt="Binding unidirectionnel : cible.bind(source) ; quand source change, la valeur se propage automatiquement à la cible" src=".github/assets/ex2-binding-unidirectionnel.svg"/>
 
 ### Découverte du code
 
 1. Ouvrez `src/main/java/fr/univ_amu/iut/exercice2/LiaisonProprietes.java`. Vous y trouverez :
    - Un champ `anIntProperty` déjà présent (hérité de l'exercice 1)
-   - Une méthode `lierEtDelierProprietes()` avec un TODO détaillé
-   - La sortie console attendue est documentée en Javadoc au-dessus de la méthode
+   - Une méthode `lierEtDelierProprietes()` avec **le scénario `setValue/set` déjà fourni** et **deux TODO ciblés** : afficher le header `Binding ...` + appeler `bind()`, puis afficher le header `Unbinding ...` + appeler `unbind()`
+   - Les accesseurs JavaBeans `getAnInt()`, `setAnInt()`, `anIntProperty()` déjà implémentés
+   - Une méthode `main()` prête qui appelle `lierEtDelierProprietes()`
 
 2. Ouvrez `src/test/java/fr/univ_amu/iut/exercice2/LiaisonProprietesTest.java`. Observez les deux catégories de tests :
    - Les tests 1-4 sont des **tests unitaires purs** : ils créent eux-mêmes des propriétés locales et vérifient le comportement de `bind()`, `unbind()` et `isBound()`. Ces tests ne dépendent pas de votre implémentation de `lierEtDelierProprietes()`.
-   - Les tests 5-8 vérifient la **sortie console** de `lierEtDelierProprietes()` via un mock de `System.out`.
+   - Les tests 5-8 vérifient la **sortie console** de `lierEtDelierProprietes()` via un mock de `System.out`. Le test 5 (vérification de `otherProperty.get() = 0`) passe immédiatement car la ligne correspondante est fournie ; les tests 6-8 nécessitent vos `bind()` et `unbind()`.
 
 ### Sortie console attendue de `lierEtDelierProprietes()`
 
@@ -490,14 +278,27 @@ Remarquez que la dernière ligne affiche encore 7168, pas 8192 : après `unbind(
 
 ### Travail à faire
 
+Pour vous concentrer sur le mécanisme de liaison, **le scénario d'affichage et les modifications de la source sont entièrement fournis** dans `LiaisonProprietes.java`. Seuls les deux appels `bind()` et `unbind()` (avec leurs headers respectifs) sont à écrire (4 lignes au total).
+
 1. **Créez une branche** : `git checkout -b exercice2`
-2. **Activez les tests 1-4** (les 4 tests unitaires) - ils doivent déjà passer sans aucun code de votre part, car `bind()` et `unbind()` sont des méthodes standard de JavaFX que vous utilisez directement dans les tests. Vérifiez : `./mvnw test`
-3. **Activez les tests 5-8** et implémentez `lierEtDelierProprietes()` :
-   - Créez `otherProperty` avec `new SimpleIntegerProperty(0)`
-   - Suivez les 10 étapes documentées dans le TODO de la méthode (chaque `println` + action correspondante)
-4. **Vérifiez** que les 8 tests passent : `./mvnw test`
-5. **Testez visuellement** la sortie console : `./mvnw exec:java -Dexec.mainClass="fr.univ_amu.iut.exercice2.LiaisonProprietes"` (ou cliquez sur la flèche "Run" à côté de `main()` dans VS Code)
-6. **Finalisez** :
+2. **Activez les tests 1-5** : ils passent immédiatement, sans rien implémenter (les tests 1-4 sont des tests unitaires purs sur `bind`/`unbind`/`isBound`, le test 5 vérifie une ligne déjà fournie). Vérifiez avec `./mvnw test`.
+3. **Lancez `LiaisonProprietes.main()` une première fois** (clic droit sur la méthode `main()` -> *Run Java* dans VSCode, ou bouton *Run* de votre IDE). Observez la sortie console : `otherProperty.get() = 0` apparaît partout, même après `Calling anIntProperty.set(7168).` puis `Calling anIntProperty.set(8192).`. Normal : sans `bind()`, `otherProperty` est totalement indépendante de `anIntProperty`. Aucun header `Binding ...` ni `Unbinding ...` non plus.
+4. **Activez les tests 6-8** et complétez `lierEtDelierProprietes()` (deux blocs à compléter) :
+   - Au premier TODO, écrivez 2 lignes :
+     1. Affichez `"Binding otherProperty to anIntProperty."` avec `System.out.println(...)`.
+     2. Liez via `otherProperty.bind(anIntProperty)`.
+   - Au second TODO, écrivez 2 lignes :
+     1. Affichez `"Unbinding otherProperty from anIntProperty."`.
+     2. Déliez via `otherProperty.unbind()`.
+5. **Relancez `LiaisonProprietes.main()`** et comparez avec le premier run. Vous devriez voir :
+   - Les deux headers `Binding ...` et `Unbinding ...` apparaître.
+   - `otherProperty.get() = 1024` juste après le bind (la valeur de la source a été propagée).
+   - `otherProperty.get() = 7168` (×3) après `set(7168)` (la propagation est continue).
+   - **Mais après `unbind()` puis `set(8192)`** : `otherProperty.get() = 7168` reste 7168, pas 8192. La cible a conservé sa dernière valeur et ne suit plus la source.
+   
+   Cette différence est exactement ce que `bind()` apporte : la cible **suit** la source tant que la liaison existe, et **fige sa dernière valeur** quand on délie.
+6. **Vérifiez** que les 8 tests passent : `./mvnw test`
+7. **Finalisez** :
 
 ```bash
 git add src/main/java/fr/univ_amu/iut/exercice2/
@@ -531,23 +332,18 @@ C'est la transition mentale fondamentale de ce TP : passer de la pensée **impé
 
 Le TP1 (exercice 6) utilisait une approche impérative : un tableau `int[] compteurs`, et dans chaque handler de clic un `setText()` explicite pour mettre à jour l'affichage. Cette approche fonctionne mais elle est fragile : si on ajoute un bouton, il faut penser à mettre à jour le handler ET le label.
 
-Le TP2 adopte une approche déclarative. La différence est fondamentale :
+Le TP2 adopte une approche déclarative. 
 
-```mermaid
-graph TD
-    subgraph TP1 - Imperatif
-        C1["Clic sur Rouge"] --> H1["handler:\nnbClics[0]++\nlabelTotal.setText(...)"]
-    end
-    subgraph TP2 - Declaratif
-        C2["Clic sur Rouge"] --> H2["handler:\nnbClics.set(nbClics.get()+1)"]
-        H2 -.propagation auto.-> B2["Binding:\nBindings.concat('Rouge: ', nbClics)"]
-        B2 -.mis a jour auto.-> L2["labelCompteurs.textProperty()"]
-    end
-```
 
-### Maquette attendue
+### Maquette à reproduire
+
+Voici l'interface que vous devez construire :
 
 ![Maquette PaletteReactive](src/main/resources/assets/maquette_palette_reactive.svg)
+
+**Le rendu final** (votre objectif une fois l'exercice terminé, à comparer avec la maquette ci-dessus) :
+
+<img alt="Rendu final - Exercice 3 : palette de boutons de couleur réactifs" src=".github/assets/apercu-ex3-palette-reactive.png" width="300"/>
 
 ### Découverte du code
 
@@ -605,15 +401,16 @@ graph TD
 
 2. **Activez les tests 1-7 de `BoutonCouleurTest`** et complétez `BoutonCouleur` :
    - Dans le constructeur `BoutonCouleur(String texte, String couleur)`, ajoutez : `setOnAction(e -> nbClics.set(nbClics.get() + 1));`
+   - Pour coller à la maquette, **colorez le bouton** (texte blanc, coins arrondis) en reprenant les teintes du TP1 : `"red"` → `#e74c3c`, `"green"` → `#27ae60`, `"blue"` → `#2980b9` (un `switch` sur `couleur`). On garde le nom CSS (`couleur`) pour `getCouleur()` et la coloration de la zone : `setStyle("-fx-background-color: " + teinteBouton + "; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;")`
    - Le champ `nbClics` et les accesseurs sont déjà fournis
    - Vérifiez : `./mvnw test`
 
 3. **Activez les tests 1-3 de `PaletteReactiveTest`** et implémentez la structure dans `start()` :
    - Créez un `BorderPane root`
    - Créez les trois `BoutonCouleur` avec leurs IDs (`setId("btn-rouge")` etc.)
-   - Créez un `HBox` et placez-le en `root.setTop()`
+   - Créez un `HBox` (un peu d'espacement et de padding) et placez-le en `root.setTop()`
    - Créez un `Pane zone` (id "zone", `setMinSize(300, 200)`) en `root.setCenter()`
-   - Créez un `Label labelCompteurs` (id "compteurs") en `root.setBottom()`
+   - Créez un `Label labelCompteurs` (id "compteurs") en `root.setBottom()`, **centré comme une barre de statut** (`setMaxWidth(Double.MAX_VALUE)` + `setAlignment(Pos.CENTER)`)
    - Appelez `createBindings(...)` puis créez la `Scene` et appelez `show()`
 
 4. **Activez les tests 4-15** et implémentez `createBindings()` :
@@ -642,7 +439,7 @@ git push -u origin exercice3
 
 ### Objectif
 
-Cet exercice est une **classe modèle sans interface graphique**. Vous allez modéliser un triangle par ses six coordonnées et calculer son aire via la formule du déterminant. L'objectif est de pratiquer la **convention JavaBeans complète** et les **bindings calculés** avec l'API fluente de JavaFX.
+Cet exercice est une **classe de calcul sans interface graphique**. Vous allez modéliser un triangle par ses six coordonnées et calculer son aire via la formule du déterminant. L'objectif est de pratiquer la **convention JavaBeans complète** et les **bindings calculés** avec l'API fluente de JavaFX.
 
 > Consultez les slides [CM2 #25-28](https://iutinfoaix-r202.github.io/cours/cm2-donnees-et-liaison.html#25) (convention JavaBeans), [#45-47](https://iutinfoaix-r202.github.io/cours/cm2-donnees-et-liaison.html#45) (progression API classique → statique → fluente), et [#48-49](https://iutinfoaix-r202.github.io/cours/cm2-donnees-et-liaison.html#48) (exemple complet de l'aire d'un triangle).
 
@@ -659,32 +456,13 @@ Cet exercice est une **classe modèle sans interface graphique**. Vous allez mod
 
 La convention JavaBeans est un contrat d'exposition des propriétés JavaFX. Pour chaque propriété nommée `foo` de type `T`, la classe doit exposer trois méthodes :
 
-```mermaid
-graph LR
-    P["IntegerProperty x1\n(champ privé)"]
-    G["getX1()\nretourne x1.get()"]
-    S["setX1(int v)\nx1.set(v)"]
-    A["x1Property()\nretourne x1"]
-    P --> G
-    P --> S
-    P --> A
-```
+<img alt="Convention JavaBeans : un champ IntegerProperty x1 exposé par getX1(), setX1(int) et x1Property()" src=".github/assets/ex4-convention-javabeans.svg"/>
 
 Ce triplet permet à JavaFX, aux outils (Scene Builder, IntelliJ) et aux frameworks de découvrir et lier les propriétés automatiquement, sans connaître les détails de l'implémentation.
 
 ### Le graphe de dépendances du binding
 
-```mermaid
-graph TD
-    x1 --> det["determinant\nNumberBinding"]
-    y1 --> det
-    x2 --> det
-    y2 --> det
-    x3 --> det
-    y3 --> det
-    det --> abs["Bindings.when(det >= 0)\n.then(det / 2)\n.otherwise(-det / 2)"]
-    abs --> area["area\nDoubleProperty (lié)"]
-```
+<img alt="Graphe de dépendances du binding d'aire : les six coordonnées alimentent le déterminant, puis la valeur absolue, puis la propriété area" src=".github/assets/ex4-graphe-dependances.svg"/>
 
 Dès qu'une coordonnée change, JavaFX recalcule automatiquement toute la chaîne jusqu'à `area`. Aucun appel manuel n'est nécessaire.
 
@@ -776,50 +554,32 @@ git push -u origin exercice4
 
 ### Objectif
 
-Cet exercice construit une **interface graphique** qui utilise `AireTriangle` (exercice 4) comme modèle. Six `Slider` permettent de modifier les coordonnées du triangle, un `TextField` affiche l'aire mise à jour automatiquement, et un `Pane` dessine le triangle avec trois `Line` dont les positions sont liées aux coordonnées du modèle.
+Cet exercice construit une **interface graphique** qui réutilise la classe `AireTriangle` (exercice 4) pour les calculs. Six `Slider` permettent de modifier les coordonnées du triangle, un `TextField` affiche l'aire mise à jour automatiquement, et un `Pane` dessine le triangle avec trois `Line` dont les positions sont liées aux coordonnées du triangle.
 
-C'est la démonstration concrète de la **séparation modèle / vue** : `AireTriangle` ne sait rien de l'interface graphique, et la vue ne contient aucune logique de calcul.
+C'est une illustration concrète de la **puissance des bindings** : `AireTriangle` ne contient aucun code d'affichage, l'interface ne refait aucun calcul, et tout reste synchronisé automatiquement par les liaisons.
 
 ### Ce que vous allez découvrir
 
 - [`Slider`](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/Slider.html) et sa propriété [`valueProperty()`](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/Slider.html#valueProperty()) : un contrôle numérique glissant avec `showTickLabels`, `showTickMarks`, `snapToTicks`
 - [`TextField`](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/TextField.html) non éditable, dont `textProperty()` est lié par binding
-- [`Line`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/shape/Line.html) et ses propriétés `startXProperty()`, `startYProperty()`, `endXProperty()`, `endYProperty()` liées aux coordonnées du modèle
-- Le **facteur d'échelle** : les coordonnées du modèle (entiers) sont converties en pixels par multiplication
+- [`Line`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/shape/Line.html) et ses propriétés `startXProperty()`, `startYProperty()`, `endXProperty()`, `endYProperty()` liées aux coordonnées du triangle
+- Le **facteur d'échelle** : les coordonnées du triangle (entiers) sont converties en pixels par multiplication
 
-### Architecture modèle / vue
+### Schéma des liaisons (bindings)
 
-```mermaid
-graph LR
-    subgraph Vue
-        SX1["#slider-x1"]
-        SY1["#slider-y1"]
-        SX2["#slider-x2"]
-        SY2["#slider-y2"]
-        SX3["#slider-x3"]
-        SY3["#slider-y3"]
-        TF["#aire (TextField)"]
-        L1["Line 1 (P1-P2)"]
-        L2["Line 2 (P2-P3)"]
-        L3["Line 3 (P3-P1)"]
-    end
-    subgraph Modele
-        AT["AireTriangle\nx1,y1,x2,y2,x3,y3\nareaProperty()"]
-    end
-    SX1 -- "valueProperty().bindBidirectional(x1)" --> AT
-    SX2 -- "valueProperty().bindBidirectional(x2)" --> AT
-    SX3 -- "valueProperty().bindBidirectional(x3)" --> AT
-    AT -- "areaProperty()" --> TF
-    AT -- "x1Property().multiply(50)" --> L1
-    AT -- "x2Property().multiply(50)" --> L2
-    AT -- "x3Property().multiply(50)" --> L3
-```
+<img alt="Schéma des liaisons : les six sliders sont liés aux propriétés d'AireTriangle, qui alimente le TextField d'aire et les trois Line du dessin" src=".github/assets/ex5-liaisons-bindings.svg"/>
 
-### Maquette attendue
+### Maquette à reproduire
+
+Voici l'interface que vous devez construire :
 
 ![Maquette CalculatriceTriangle](src/main/resources/assets/maquette_calculatrice_triangle.svg)
 
-Le facteur d'echelle est 50 : `sliderX1.valueProperty()` varie entre -5 et 5, ce qui correspond à -250 px à 250 px sur le panneau de dessin (centrée sur 250,250). Ainsi, si `x1 = 5`, la ligne part de `5 * 50 = 250` pixels depuis le bord gauche du panneau.
+**Le rendu final** (votre objectif une fois l'exercice terminé, à comparer avec la maquette ci-dessus) :
+
+<img alt="Rendu final - Exercice 5 : calculatrice de triangle avec sliders et tracé" src=".github/assets/apercu-ex5-calculatrice-triangle.png" width="520"/>
+
+Le facteur d'échelle est 50 : chaque slider varie de **0 à 10**, ce qui correspond à **0 à 500 px** sur le panneau de dessin (500 × 500). Ainsi, si `x1 = 5`, la ligne part de `5 * 50 = 250` pixels depuis le bord gauche du panneau. Les sliders ont des valeurs initiales non nulles, pour qu'un triangle soit dessiné dès l'ouverture (sinon les trois points sont confondus en (0, 0) et le panneau paraît vide).
 
 ### Découverte du code
 
@@ -847,7 +607,7 @@ Le facteur d'echelle est 50 : `sliderX1.valueProperty()` varie entre -5 et 5, ce
 | 5 | `lesSlidersOntDesTickMarks` | `showTickLabels`, `showTickMarks`, `snapToTicks` = true | Config slider |
 | 6 | `leTextFieldAireExiste` | `#aire` existe et `isEditable() == false` | TextField non editable |
 | 7 | `leTextFieldAireEstLieParBinding` | `textProperty().isBound() == true` | `bind()` |
-| 8 | `deplacerSliderModifieAire` | sx2=6, sy3=3 -> TextField contient "9" | Connexion modele/vue |
+| 8 | `deplacerSliderModifieAire` | P1(0,0) P2(6,0) P3(0,3) -> TextField contient "9" | Synchronisation par binding |
 | 9 | `lePanneauDessinExiste` | `#dessin` est un `Pane` | Pane de dessin |
 | 10 | `lesTroisLignesExistent` | 3 objets `Line` dans `#dessin` | Dessin du triangle |
 | 11 | `deplacerSliderModifieLeDessin` | sx1=5, sy1=3 -> `startX=250`, `startY=150` | Binding coords * 50 |
@@ -862,12 +622,13 @@ Le facteur d'echelle est 50 : `sliderX1.valueProperty()` varie entre -5 et 5, ce
    - `Scene` + `stage.show()`
 
 3. **Activez les tests 4-5** et ajoutez les 6 sliders :
-   - Pour chaque coordonnée : `Slider s = new Slider(-5, 5, 0)` avec `setId("slider-x1")` etc.
+   - Pour chaque coordonnée : `Slider s = new Slider(0, 10, valeurInitiale)` avec `setId("slider-x1")` etc. (les valeurs initiales sont déjà fixées dans les champs)
    - Configurez `setShowTickLabels(true)`, `setShowTickMarks(true)`, `setSnapToTicks(true)`
    - Ajoutez label + slider dans le `GridPane`
 
 4. **Activez les tests 6-8** et ajoutez le `TextField` aire :
    - `TextField tfAire = new TextField()` avec `setId("aire")` et `setEditable(false)`
+   - Pour coller à la maquette, **colorez le champ en vert** : `setStyle("-fx-control-inner-background: #eafaf1; -fx-text-fill: #27ae60; -fx-font-weight: bold; -fx-border-color: #27ae60; -fx-border-width: 1.5; -fx-border-radius: 3; -fx-background-radius: 3;")`
    - Liez : `tfAire.textProperty().bind(modele.areaProperty().asString())`
    - Liez les sliders au modèle : `sliderX1.valueProperty().bindBidirectional(modele.x1Property())`
 
@@ -882,6 +643,7 @@ Le facteur d'echelle est 50 : `sliderX1.valueProperty()` varie entre -5 et 5, ce
      l1.endYProperty().bind(modele.y2Property().multiply(50));
      ```
    - Ajoutez les 3 lignes à `dessin.getChildren()`
+   - Pour coller à la maquette, ajoutez **par-dessus les lignes** un **marqueur coloré** à chaque sommet (`Circle` de rayon 5 : P1 `#e74c3c`, P2 `#27ae60`, P3 `#8e44ad`) et une **étiquette** `Text` « P1 » / « P2 » / « P3 ». Liez leurs positions au modèle comme les lignes (`marqueurP1.centerXProperty().bind(modele.x1Property().multiply(50))`, etc. ; pour les étiquettes, décalez de quelques pixels avec `.add(8)` / `.subtract(8)`).
 
 6. **Vérifiez visuellement** : `./mvnw javafx:run`
 
@@ -921,23 +683,21 @@ Ce pattern est directement lié au concept d'**affordance** vu en CM2 : un bouto
 
 L'affordance est la propriété d'un objet qui suggère son utilisation. En IHM, désactiver un bouton tant que les conditions ne sont pas remplies est une forme d'affordance : l'utilisateur comprend immédiatement ce qu'il doit faire pour pouvoir cliquer.
 
-```mermaid
-graph TD
-    userId["#user-id\ntextProperty()"]
-    pwd["#pwd\ntextProperty()"]
-
-    userId -- "longueur >= 6" --> pwdEditable["pwd.editableProperty()"]
-    userId -- "inclus dans" --> binValide["BooleanBinding\nformValid.computeValue()"]
-    pwd -- "longueur >= 8\n+ majuscule\n+ chiffre" --> binValide
-    binValide -- "not()" --> okDisable["#btn-ok\ndisableProperty()"]
-    binValide --> cancelActive["#btn-cancel\ndisableProperty()"]
-```
+<img alt="Affordance et binding : la validité du formulaire (BooleanBinding) pilote l'éditabilité du mot de passe et l'activation des boutons OK / Annuler" src=".github/assets/ex6-affordance-binding.svg"/>
 
 **Insight clé :** `BooleanBinding.computeValue()` est appelé automatiquement par JavaFX chaque fois qu'une dépendance déclarée change. Vous n'avez jamais à appeler `valider()` ni `rafraichir()`.
 
-### Maquette attendue
+### Maquette à reproduire
+
+Voici l'interface que vous devez construire :
 
 ![Maquette FormulaireConnexion - état initial vs formulaire valide](src/main/resources/assets/maquette_formulaire_connexion.svg)
+
+**Le rendu final** (votre objectif une fois l'exercice terminé, à comparer avec la maquette ci-dessus) :
+
+Comme la maquette, deux états : à gauche le formulaire **vide** (mot de passe non éditable, boutons désactivés) ; à droite le formulaire **valide** (OK vert actif, Annuler rouge, message de bienvenue).
+
+<img alt="Exercice 6 - état initial : formulaire vide, OK et Annuler désactivés" src=".github/assets/apercu-ex6-formulaire-connexion.png" width="300"/> <img alt="Exercice 6 - formulaire valide : identifiant et mot de passe remplis, OK vert actif, Annuler rouge, message affiché" src=".github/assets/apercu-ex6-formulaire-connexion-valide.png" width="300"/>
 
 ### Les règles de validation
 
@@ -1016,6 +776,15 @@ graph TD
    - Annuler : `userId.clear(); pwd.clear();`
    - OK : `labelMessage.setText("Bienvenue " + userId.getText() + " (" + "*".repeat(pwd.getText().length()) + ")");`
 
+7. **Style des boutons (cf. maquette, non testé)** : **gris** tant qu'ils sont désactivés, puis **vert (OK)** / **rouge (Annuler)** une fois actifs. On lie `styleProperty()` à `disabledProperty()` :
+   ```java
+   String gris = "-fx-background-color: #cccccc; -fx-text-fill: #777777; -fx-background-radius: 6; -fx-opacity: 1;";
+   btnOk.styleProperty().bind(Bindings.when(btnOk.disabledProperty())
+       .then(gris)
+       .otherwise("-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;"));
+   // idem pour btnCancel avec #e74c3c
+   ```
+
 7. **Vérifiez** : `./mvnw javafx:run` et `./mvnw test`
 
 8. **Finalisez** :
@@ -1050,25 +819,22 @@ Cet exercice synchronise **trois contrôles** sur une même valeur : un `Circle`
 
 La différence entre les deux modes de liaison est fondamentale :
 
-```mermaid
-graph LR
-    subgraph bind - unidirectionnel
-        A1["source"] -- "toujours vers" --> B1["cible\n(isBound=true)"]
-    end
-    subgraph bindBidirectional - dans les deux sens
-        A2["propriete A"] <-- "modification" --> B2["propriete B"]
-        B2 <-- "modification" --> A2
-    end
-```
+<img alt="bind (unidirectionnel : source vers cible) vs bindBidirectional (les deux propriétés se synchronisent dans les deux sens)" src=".github/assets/ex7-bind-vs-bidirectionnel.svg"/>
 
 - `bind()` : la cible suit la source. La cible ne peut pas être modifiée directement.
 - `bindBidirectional()` : les deux propriétés restent indépendantes mais se synchronisent mutuellement. Modifier l'une met à jour l'autre, et vice versa.
 
 **Contrainte de type :** `bindBidirectional` ne fonctionne qu'entre deux propriétés du **même type**. Pour relier un `TextField` (`StringProperty`) à un `Slider` (`DoubleProperty`), il faut un convertisseur. C'est le rôle du `TextFormatter<Double>` avec un `NumberStringConverter`.
 
-### Maquette attendue
+### Maquette à reproduire
+
+Voici l'interface que vous devez construire :
 
 ![Maquette CercleInteractif](src/main/resources/assets/maquette_cercle_interactif.svg)
+
+**Le rendu final** (votre objectif une fois l'exercice terminé, à comparer avec la maquette ci-dessus) :
+
+<img alt="Rendu final - Exercice 7 : cercle dont le rayon est lié à un slider et un champ (liaison bidirectionnelle)" src=".github/assets/apercu-ex7-cercle-interactif.png" width="460"/>
 
 Le cercle est centré dans le panneau par binding (`centerX.bind(pane.widthProperty().divide(2))`), le slider a une valeur max de 250, et le rayon initial est 150.
 
@@ -1102,9 +868,9 @@ Le cercle est centré dans le panneau par binding (`centerX.bind(pane.widthPrope
 1. **Créez une branche** : `git checkout -b exercice7`
 
 2. **Activez les tests 1-4** et créez les composants de base :
-   - `Circle cercle = new Circle(150)` avec `setId("cercle")`
-   - `Slider slider = new Slider(0, 250, 150)` avec `setId("slider")`
-   - `TextField tfRayon = new TextField()` avec `setId("rayon")`
+   - `Circle cercle = new Circle(150)` avec `setId("cercle")`. Pour coller à la maquette, donnez-lui un **fond bleu clair et un contour bleu** : `cercle.setFill(Color.web("#cfe8fb"))` et `cercle.setStroke(Color.web("#2980b9"))` (sinon le cercle est noir par défaut).
+   - `Slider slider = new Slider(0, 250, 150)` avec `setId("slider")`. Pour coller à la maquette, **affichez ses bornes 0 / 250** (`setShowTickLabels(true)`, `setMajorTickUnit(250)`, `setMinorTickCount(0)`, `setShowTickMarks(false)`) et placez-le **en bas**, à côté du champ rayon (un `HBox` : slider qui s'étire via `HBox.setHgrow(slider, Priority.ALWAYS)` + le `TextField` à droite).
+   - `TextField tfRayon = new TextField()` avec `setId("rayon")` (largeur réduite, ex. `setMaxWidth(70)`)
 
 3. **Activez les tests 5-7** et liez le slider au cercle :
    ```java
@@ -1162,11 +928,7 @@ La formule de conversion : `F = C * 9/5 + 32` (et l'inverse `C = (F - 32) * 5/9`
 
 Quand deux propriétés se synchronisent mutuellement via `ChangeListener`, il y a un risque de boucle infinie : modifier A declenche le listener qui modifie B, qui declenche le listener qui modifie A, a l'infini.
 
-```mermaid
-graph LR
-    C["sliderCelsius\nvaleur = 100"] -- "ChangeListener\nF = C*9/5+32" --> F["sliderFahrenheit\nvaleur = 212"]
-    F -- "ChangeListener\nC = (F-32)*5/9" --> C
-```
+<img alt="Risque de boucle infinie : deux sliders liés par des ChangeListener réciproques (Celsius vers Fahrenheit et inverse)" src=".github/assets/ex8-boucles-infinies.svg"/>
 
 Le motif classique pour eviter cela est le **drapeau "en cours de mise a jour"** :
 
@@ -1184,9 +946,15 @@ celsius.addListener((obs, old, newVal) -> {
 
 Sans ce drapeau, le listener sur `celsius` modifie `fahrenheit`, qui declenche le listener sur `fahrenheit`, qui remodifie `celsius`, etc. Avec le drapeau, la boucle s'arrête apres la première propagation.
 
-### Maquette attendue
+### Maquette à reproduire
+
+Voici l'interface que vous devez construire :
 
 ![Maquette ConvertisseurTemperatures](src/main/resources/assets/maquette_convertisseur.svg)
+
+**Le rendu final** (votre objectif une fois l'exercice terminé, à comparer avec la maquette ci-dessus) :
+
+<img alt="Rendu final - Exercice 8 : convertisseur de températures (Celsius / Fahrenheit) en liaison bidirectionnelle" src=".github/assets/apercu-ex8-convertisseur.png" width="240"/>
 
 ### Découverte du code
 
@@ -1248,6 +1016,8 @@ Sans ce drapeau, le listener sur `celsius` modifie `fahrenheit`, qui declenche l
 
 4. **Activez les tests 8-11** : vérifiez que les TextFields restent synchronisés après les conversions. Si le binding bidirectionnel entre les TextFields et les sliders est en place depuis l'étape 2, cela doit fonctionner automatiquement.
 
+5. **Style (pour coller à la maquette, non testé)** : chaque slider + champ vit dans un panneau (`VBox` centré, bordé). En tête de chaque panneau, un `Label` pleine largeur sert d'**en-tête de carte coloré** : « Celsius (°C) » sur fond bleu `#4a90d9`, « Fahrenheit (°F) » sur fond rouge `#e74c3c`, texte blanc gras (`label.setMaxWidth(Double.MAX_VALUE)` + `setStyle("-fx-background-color: #4a90d9; -fx-text-fill: white; ... -fx-alignment: center;")`). Donnez la **même largeur aux deux cartes** (`setPrefWidth(170)` sur chaque `VBox`) pour qu'elles soient symétriques.
+
 5. **Vérifiez** : `./mvnw javafx:run` et `./mvnw test`
 
 6. **Finalisez** :
@@ -1270,7 +1040,15 @@ Ces exercices sont facultatifs et s'adressent à celles et ceux qui souhaitent a
 
 ## Bonus 9 - BalleRebondissante (★★★★)
 
-![Balle rebondissante - résultat attendu](src/main/resources/assets/balle_rebondissante.png)
+### Maquette à reproduire
+
+Voici l'interface que vous devez construire :
+
+![Maquette BalleRebondissante](src/main/resources/assets/maquette_balle_rebondissante.svg)
+
+**Le rendu final** (votre objectif une fois l'exercice terminé, à comparer avec la maquette ci-dessus) :
+
+<img alt="Rendu final - Bonus 9 : balle corail qui rebondit, boutons Démarrer (bleu) / Stop" src=".github/assets/apercu-bonus9-balle.png" width="300"/>
 
 ### Objectif
 
@@ -1286,15 +1064,7 @@ Animer une balle qui rebondit sur les bords d'une fenêtre. Cet exercice introdu
 
 ### Architecture réactive du rebond
 
-```mermaid
-graph LR
-    VX["vitesseX\nDoubleProperty"]
-    CX["cercle.centerX\nDoubleProperty"]
-    BORD["toucheBordX\nBooleanBinding\n(centerX <= r || centerX >= largeur-r)"]
-
-    CX --> BORD
-    BORD -- "Bindings.when(toucheBord)\n.then(vitesseX.negate())\n.otherwise(vitesseX)" --> VX
-```
+<img alt="Architecture réactive du rebond : un BooleanBinding détecte le contact avec le bord et inverse la vitesse via Bindings.when().then().otherwise()" src=".github/assets/bonus9-architecture-rebond.svg"/>
 
 ### Travail à faire
 
@@ -1310,7 +1080,15 @@ graph LR
 
 ## Bonus 10 - SlowPong (★★★★★)
 
-![Slow Pong - résultat attendu](src/main/resources/assets/slow_pong.png)
+### Maquette à reproduire
+
+Voici l'interface que vous devez construire :
+
+![Maquette SlowPong](src/main/resources/assets/maquette_slow_pong.svg)
+
+**Le rendu final** (votre objectif une fois l'exercice terminé, à comparer avec la maquette ci-dessus) :
+
+<img alt="Rendu final - Bonus 10 : terrain de Pong bleu nuit, deux raquettes grises et la balle blanche" src=".github/assets/apercu-bonus10-pong.png" width="300"/>
 
 ### Objectif
 
@@ -1326,15 +1104,7 @@ Implémenter un jeu de Pong complet avec deux raquettes (contrôlées à la sour
 
 ### Architecture générale
 
-```mermaid
-graph TD
-    Timer["AnimationTimer\nboucle de jeu"] --> Deplacement["balle.centerX += vitesseX\nballe.centerY += vitesseY"]
-    Deplacement --> CollisionBord["balle touche bord\nhaut/bas : vitesseY.negate()"]
-    Deplacement --> CollisionRaquette["balle intersecte raquette\n: vitesseX.negate()"]
-    Deplacement --> Sortie["balle sort par gauche/droite\n: score++ + reset position"]
-    ScoreG["scoreGauche\nIntegerProperty"] --> LabelG["labelScoreGauche\n(lié par binding)"]
-    ScoreD["scoreDroite\nIntegerProperty"] --> LabelD["labelScoreDroite\n(lié par binding)"]
-```
+<img alt="Architecture du Pong : l'AnimationTimer déplace la balle, gère les collisions et les sorties ; les scores sont liés aux labels par binding" src=".github/assets/bonus10-architecture.svg"/>
 
 ### Travail à faire
 
@@ -1353,91 +1123,6 @@ graph TD
 - [OpenJFX - Getting Started](https://openjfx.io/openjfx-docs/)
 - [JavaFX Properties and Bindings](https://openjfx.io/javadoc/25/javafx.base/javafx/beans/package-summary.html)
 - [TestFX Documentation](https://github.com/TestFX/TestFX)
-
----
-
-## Dépannage
-
-**Le premier `./mvnw` prend plusieurs minutes** - c'est normal. Le wrapper télécharge Maven 3.9.14 puis toutes les dépendances JavaFX / JUnit / TestFX (~50 Mo au total). Les exécutions suivantes utilisent le cache local et sont quasi instantanées.
-
-**`./mvnw: Permission denied`** - après certains clones, le bit exécutable peut être perdu. Corrigez avec :
-```bash
-chmod +x mvnw
-```
-
-**`java: command not found` ou version < 25** - ce problème ne devrait pas se produire dans un Codespace. En cas d'installation locale, voir ci-dessous.
-
-**Tests TestFX qui plantent avec `No X11 DISPLAY`** (Linux sans serveur X actif) - lancez les tests via `xvfb-run` :
-```bash
-xvfb-run --auto-servernum ./mvnw test
-```
-Dans un Codespace, le display virtuel est déjà configuré et ce problème ne se produit pas.
-
-**Sous Windows, `./mvnw ...` ne fonctionne pas** - utilisez `mvnw.cmd` à la place :
-```powershell
-.\mvnw.cmd javafx:run
-```
-
-**`Cannot resolve symbol` ou imports manquants** - votre IDE signale des erreurs en rouge sur des classes JavaFX ou JUnit. Cela arrive quand le projet n'a pas encore été indexé. Lancez :
-```bash
-./mvnw compile
-```
-Cette commande force le téléchargement des dépendances et la recompilation. L'IDE se resynchronise ensuite automatiquement (peut nécessiter quelques secondes).
-
-**Branche créée depuis le mauvais point de départ** - vous avez créé votre branche `exerciceN` alors que vous étiez déjà sur une branche d'exercice précédent. Pour corriger sans perdre votre travail :
-```bash
-# Sauvegardez votre travail en cours (optionnel si déjà commité)
-git stash
-# Retournez sur main
-git checkout main
-git pull
-# Recréez la branche depuis main
-git checkout -b exerciceN
-# Récupérez votre travail si nécessaire
-git stash pop
-```
-
-**Conflits Git au merge** - si GitHub vous signale des conflits lors de la fusion d'une PR, c'est souvent que `main` a avancé depuis la création de votre branche. Résolvez en local :
-```bash
-git checkout main
-git pull
-git checkout exerciceN
-git rebase main
-# Résolvez les conflits dans les fichiers signalés, puis :
-git rebase --continue
-git push --force-with-lease origin exerciceN
-```
-
----
-
-<details>
-<summary>Installation locale (facultative) - pour travailler en dehors du Codespace</summary>
-
-**Sur les machines de l'IUT** (Linux, SDKMAN pré-installé) :
-
-```bash
-sdk install java 25.fx-zulu
-```
-
-**Chez vous sous Linux / macOS** - installez d'abord SDKMAN depuis [sdkman.io](https://sdkman.io), puis la commande ci-dessus.
-
-**Windows** - via [Scoop](https://scoop.sh) :
-
-```powershell
-scoop bucket add java
-scoop install java/zulu-jdk-fx25
-```
-
-Alternative Windows : installateur GUI sur [azul.com/downloads](https://www.azul.com/downloads/?package=jdk-fx&version=25).
-
-**Vérifier l'installation** :
-
-```bash
-java -version
-# doit afficher "openjdk version \"25.0.x\"" ou similaire
-```
-
-</details>
 
 ---
 
