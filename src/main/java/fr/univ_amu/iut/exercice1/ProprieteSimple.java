@@ -41,14 +41,20 @@ public class ProprieteSimple {
    * </pre>
    */
   void creerPropriete() {
-    if (anIntProperty == null) {
-      anIntProperty = new SimpleIntegerProperty();
-    }
-
-    System.out.println();
+    anIntProperty = new SimpleIntegerProperty(1024);
     System.out.println("anIntProperty = " + anIntProperty);
     System.out.println("anIntProperty.get() = " + anIntProperty.get());
     System.out.println("anIntProperty.getValue() = " + anIntProperty.getValue());
+    // TODO exercice 1 : créer la propriété et afficher ses informations.
+    //
+    // 1. Instancier anIntProperty avec new SimpleIntegerProperty() si elle
+    //    est null. Sinon, ne rien faire (elle a déjà été créée par setAnInt).
+    //
+    // 2. Afficher sur System.out :
+    //    - une ligne vide
+    //    - "anIntProperty = " + anIntProperty (appelle toString())
+    //    - "anIntProperty.get() = " + anIntProperty.get()
+    //    - "anIntProperty.getValue() = " + anIntProperty.getValue()
   }
 
   /**
